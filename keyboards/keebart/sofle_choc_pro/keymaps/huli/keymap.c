@@ -70,8 +70,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [FUNC] = LAYOUT_split_4x6_5(
   TO(EXTRA),   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,  KC_F6,
-  KC_GRV,    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                     KC_F7,   KC_F8,   KC_F9,   KC_F10, KC_F11, KC_F12,
-  _______, KC_EXLM,LSFT(KC_MINS), KC_TILDE,  KC_AT, KC_PERC,                 _______, _______, _______, _______, _______, _______,
+  KC_GRV,      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                     KC_F7,   KC_F8,   KC_F9,   KC_F10, KC_F11, KC_F12,
+  _______,  KC_EXLM,LSFT(KC_MINS), KC_TILDE,  KC_AT, KC_PERC,                  KC_F13,  KC_F14,  KC_F15,  KC_F16, KC_F17, KC_F18,
   _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, _______,       _______, RM_VALD, RM_VALU, RALT(KC_MINS), KC_NUBS, KC_BSLS, _______,
                     _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   A(KC_F4), _______, _______, _______, _______, LCA(KC_DEL),                RM_TOGG,  _______, _______,  _______,  _______, KC_PSCR,
   _______, TO(BASE), TO(SPCENT), TO(FUNC), XXXXXXX, XXXXXXX,                KC_PGUP,  KC_INS,  KC_UP,   KC_DEL, C(KC_BSPC), C(KC_BSPC),
   _______, C(KC_Y), C(KC_Z),  XXXXXXX,  XXXXXXX, KC_CAPS,                   KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  C(KC_BSPC), C(KC_BSPC),
-  _______, C(KC_X), C(KC_C), C(KC_V), XXXXXXX, XXXXXXX,  _______,      _______,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_PWR,
+  _______, C(KC_X), C(KC_C), C(KC_V), XXXXXXX, XXXXXXX,  _______,      _______,  KC_HOME, KC_END, XXXXXXX, XXXXXXX,   XXXXXXX, KC_PWR,
                     _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 };
@@ -104,7 +104,7 @@ uint8_t wasd[] = {18, 23, 19, 14};
 uint8_t numNum[] = {22, 20, 13, 10, 19, 14, 9, 18, 15, 8};
 uint8_t numOp[] = {7, 16, 17, 25, 24};
 uint8_t funcKeysMaster[] = {25, 17, 16, 7, 6, 24, 18, 15, 8, 5};
-uint8_t funcKeySlave[] = {6, 7, 16, 17, 25, 26, 27, 24, 18, 15, 8, 5};
+uint8_t funcKeySlave[] = {6, 7, 16, 17, 25, 26, 27, 24, 18, 15, 8, 5, 28, 23, 19, 14, 9, 4};
 uint8_t centeredArrow[] = {9, 14, 15, 19};
 uint8_t layerSwitch[] = {24, 18, 15};
 
@@ -143,7 +143,7 @@ void set_num_key_color(void) {
     rgb_matrix_set_color_all(DEFAULT_RGB);
     set_key_color(false, numNum, 10, 0, 0, 100);
     set_key_color(false, numOp, 5, 0, 100, 100);
-    set_key_color(false, (uint8_t[]) { 27,28 }, 2, 100, 0, 0);
+    set_key_color(false, (uint8_t[]) { 27, 28 }, 2, 100, 0, 0); // double backspace
     set_single_key_color(false, 23, 0, 100, 50); // dot
     set_single_key_color(false, 29, 0, 100, 0); // Enter
 };
@@ -151,15 +151,15 @@ void set_num_key_color(void) {
 void set_func_key_color(void) {
     rgb_matrix_set_color_all(DEFAULT_RGB);
     set_key_color(true, funcKeysMaster, 10, 100, 0, 0);
-    set_key_color(false, funcKeySlave, 12, 100, 0, 0);
+    set_key_color(false, funcKeySlave, 18, 100, 0, 0);
 };
 
 void set_extra_key_color(void) {
     rgb_matrix_set_color_all(DEFAULT_RGB);
     set_key_color(false, centeredArrow, 4, 0, 0, 100);
     set_key_color(true, layerSwitch, 3, 0, 0, 100);
-    set_single_key_color(false, 5, 0, 100, 100); // Page up
-    set_single_key_color(false, 4, 100, 100, 0); // Page down
+    set_key_color(false, (uint8_t[]) { 5, 3 }, 2, 0, 100, 100); // Page up, Home
+    set_key_color(false, (uint8_t[]) { 4, 10 }, 2, 100, 100, 0); // Page down, End
     set_single_key_color(false, 8, 0, 100, 0); // Insert
     set_single_key_color(false, 18, 100, 0, 0); // Delete
     set_single_key_color(false, 24, 100, 0, 40); // CTRL+Backspace
